@@ -5,9 +5,6 @@ import android.util.Log
 import de.robv.android.xposed.*
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 
-
-fun loge(tag: String, content: String) = Log.e(tag, content)
-
 /**
  * @author Jowan
  */
@@ -21,6 +18,8 @@ class Tutorial : IXposedHookLoadPackage {
             TOP_JOWANXU_XPOSEDREMOVEAD -> checkModuleLoaded(lpParam)
         }
     }
+
+    fun loge(tag: String, content: String) = Log.e(tag, content)
 
     fun tryHook(packageName: String, hook: () -> Unit) {
         try {
@@ -105,7 +104,7 @@ class Tutorial : IXposedHookLoadPackage {
      * @return 方法名
      */
     private fun getAdMethodNameIntByWeicoVersion(versionName: String): String = when (versionName) {
-        "2.7.9", "2.7.5-5", "2.7.5" -> "loadInt"
+        "2.6.2", "2.6.1", "2.5.9", "2.5.7-5", "2.5.7" -> "loadInt"
         else -> "loadInt"
     }
 
@@ -116,22 +115,22 @@ class Tutorial : IXposedHookLoadPackage {
      * @return 方法名
      */
     private fun getAdMethodNameLongByWeicoVersion(versionName: String): String = when (versionName) {
-        "2.7.9", "2.7.5-5", "2.7.5" -> "loadLong"
+        "2.6.2", "2.6.1", "2.5.9", "2.5.7-5", "2.5.7" -> "loadLong"
         else -> "loadLong"
     }
 
     companion object {
-        private val TOP_JOWANXU_XPOSEDREMOVEAD = "top.jowanxu.xposedremovead"
-        private val TOP_JOWANXU_XPOSEDREMOVEAD_ACTIVITY = "top.jowanxu.xposedremovead.MainActivity"
-        private val HOOK_XPOSEDREMOVEAD_METHOD_NAME = "isModuleLoaded"
-        private val LOG_HOOK = "Hook "
-        private val LOG_HOOK_ERROR_STR = " 出错"
-        private val ANDROID_APP_APPLICATION = "android.app.Application"
-        private val ON_CREATE_METHOD = "onCreate"
-        private val WEICO_PACKAGE_NAME = "com.weico.international"
-        private val WEICO_HOOK_ACTIVITY_NAME = "com.weico.international.activity.v4.Setting"
-        private val DISPLAY_AD = "display_ad"
-        private val AD_DISPLAY_TIME = "ad_display_time"
+        private const val TOP_JOWANXU_XPOSEDREMOVEAD = "top.jowanxu.xposedremovead"
+        private const val TOP_JOWANXU_XPOSEDREMOVEAD_ACTIVITY = "top.jowanxu.xposedremovead.MainActivity"
+        private const val HOOK_XPOSEDREMOVEAD_METHOD_NAME = "isModuleLoaded"
+        private const val LOG_HOOK = "Hook "
+        private const val LOG_HOOK_ERROR_STR = " 出错"
+        private const val ANDROID_APP_APPLICATION = "android.app.Application"
+        private const val ON_CREATE_METHOD = "onCreate"
+        private const val WEICO_PACKAGE_NAME = "com.weico.international"
+        private const val WEICO_HOOK_ACTIVITY_NAME = "com.weico.international.activity.v4.Setting"
+        private const val DISPLAY_AD = "display_ad"
+        private const val AD_DISPLAY_TIME = "ad_display_time"
         private val TAG = Tutorial::class.java.simpleName
     }
 
